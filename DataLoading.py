@@ -3,7 +3,6 @@
 #Date: 2021-11-06
 #Student 1: Tiara Smith
 #Student 2: Tristan Bock
-#Student 3: Marcos Lara
 #ReadCSV.py
 '''
 This function accepts a CSV file and returns a 2-dimensional list
@@ -21,4 +20,5 @@ def readcsv(file):
         values.append(header)
         for lines in spreadsheet:
             values.append([item.strip() for item in lines.split(",")])
+        spreadsheet.close()
         return values
