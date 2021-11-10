@@ -30,7 +30,7 @@ def colClean(valueArray):
     toDeleteSet = set()
     for col in range(len(valueArray[0])):
         for row in valueArray[1:]:
-            if (row[col].isnumeric() == False):
+            if (row[col].lstrip('-').replace('.', '', 1).isnumeric() == False):
                 toDeleteSet.add(col) #if a column contains a nonnumeric string, flag for deletion
 
     toDelete = sorted(toDeleteSet, reverse=True) #This is now a list in descending order
