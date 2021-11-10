@@ -29,12 +29,15 @@ def rowClean(valueArray):
 def colClean(valueArray):
     toDeleteSet = set()
     for col in range(len(valueArray[0])):
-        for row in valueArray:
-            if not row[col].isnumeric():
+        for row in valueArray[1:]:
+            if (row[col].isnumeric() == False):
                 toDeleteSet.add(col) #if a column contains a nonnumeric string, flag for deletion
 
     toDelete = sorted(toDeleteSet, reverse=True) #This is now a list in descending order
     for item in toDelete:
         for row in valueArray:
-            row.pop(item) #Pop from right to left to avoid range errors
+            del row[item] #Pop from right to left to avoid range errors
     return valueArray
+
+def removeEmpty(valueArray):
+    return [x for x in valueArray if x != []] #Removes all empty lists from the set after cleaning.
