@@ -268,7 +268,241 @@ elif (file_name == '2'):
 	while(select != '0'):
 		select = input("\nSelect from the following options.\n1. Perform Numerical Analysis\n2. Search\n0. Quit\nEnter: ")
 		if(select == '1'):
-			print("Numerical Analysis code goes here.")
+			# prints out all the row names on the same line
+			print("Descriptor\t", end = "", flush = True)
+			for i in range(len(data[0])):
+				print(data[0][i], "\t", end = "", flush = True)
+			
+			print("")
+			for i in range(len(data[0]) + 1):
+				print("************\t", end = "", flush = True)
+			
+			print("")
+			print("Count\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				count = 0 
+				# iterate rows
+				for row in data:
+					count+=1
+				print(count, "\t\t", end = "", flush = True)
+
+			print("")
+			print("Unique\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				setNums = set(listNums)
+				print(len(setNums), "\t\t", end = "", flush = True)
+			
+			print("")
+			print("Mean\t\t", end = "", flush = True)
+			# iterate columns
+			listOfMeans = []
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# calculates mean and appends to the list
+				print("%0.2f" %(sum(listNums)/len(listNums)), "\t\t", end = "", flush = True)
+				listOfMeans.append((sum(listNums)/len(listNums)))
+
+			
+			print("")
+			print("Median\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# sorts list
+				listNums.sort()
+				# finds median 
+				print(listNums[int(len(listNums)/2)], "\t\t", end = "", flush = True)
+
+			print("")
+			print("Mode\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# calculates mode
+				print(max(set(listNums), key=listNums.count), "\t\t", end = "", flush = True)
+			
+			listOfVariances = []
+			# Calculate variance but do not print, store for calculating SD
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listTotal = 0
+				count = 0
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						count += 1
+						# calculates variance 
+						listTotal += (float(row[i]) - listOfMeans[i])**2
+				# appends variance
+				listOfVariances.append(listTotal/count)
+
+			print("")
+			print("SD\t\t", end = "", flush = True)
+			for i in range(0, len(data[0])):
+				# calculates standard deviation
+				print("%0.2f" %(float(listOfVariances[i]))**(1/2), "\t\t", end = "", flush = True)
+
+			print("")
+			print("Variance\t", end = "", flush = True)
+			for i in range(0, len(data[0])):
+				# prints variance
+				print("%0.2f" %(float(listOfVariances[i])), "\t\t", end = "", flush = True)
+
+
+			print("")
+			print("Min\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds min value
+				print(min(listNums),"\t\t", end = "", flush = True)
+
+
+			print("")
+			print("P20\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds 20th percentile
+				print(listNums[int((20/100) * len(listNums))], "\t\t", end = "", flush = True)
+
+			print("")
+			print("P40\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds 40th percentile
+				print(listNums[int((40/100) * len(listNums))], "\t\t", end = "", flush = True)
+
+			print("")
+			print("P50\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds 50th percentile
+				print(listNums[int((50/100) * len(listNums))], "\t\t", end = "", flush = True)
+
+			print("")
+			print("P60\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds 60th percentile
+				print(listNums[int((60/100) * len(listNums))], "\t\t", end = "", flush = True)
+
+			print("")
+			print("P80\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds 80th percentile
+				print(listNums[int((80/100) * len(listNums))], "\t\t", end = "", flush = True)
+
+			print("")
+			print("Max\t\t", end = "", flush = True)
+			# iterate columns
+			for i in range(0, len(data[0])):
+				listNums = []
+				# iterate rows
+				for row in data:
+					# skips first entry in column since it is a header
+					if (row[i] == data[0][i]):
+						1+1
+					else:
+						# appends values to the list
+						listNums.append(float(row[i]))
+				# finds max value
+				print(max(listNums),"\t\t", end = "", flush = True)
+
+						
+
 		elif(select == '2'):
 			
 			#print(data[0][0])
