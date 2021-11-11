@@ -228,14 +228,16 @@ elif (file_name == '2'):
 	'''
 	def rowClean(valueArray):
 		toDelete = []
+        uniqueRows = set()
 		for row in range(1, len(valueArray)): #Skip the first line because it's the header and contains labels.
 			flag = False
 			for item in valueArray[row]:
 				if item == '': #if a row has a missing column entry
 					flag = True
-			s = set(valueArray[row])
-			if (len(s) == 1 and len(s) != len(valueArray[row])): #if a row has all duplicate entries.
+			if valueArray[row] in uniqueRows: #if a row is a duplicate with another (already in the set)
 				flag = True
+            else:
+                uniqueRows.add(valueArray[row])
 			if flag:
 				toDelete.append(row) #collect all rows flagged for deletion into an index list.
 		toDelete.sort(reverse=True)
