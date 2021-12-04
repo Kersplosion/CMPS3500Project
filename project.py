@@ -5,14 +5,16 @@
 #Student 2: Tristan Bock
 #project.py
 import csv
-# asks the user what file they want to open. 
-file_name = input ("Which file do you want to open? \n1.InputDataSample.csv\n2.Boston_Lyft_Uber_Data.csv\nEnter: ")
-# if the file is InputDataSample.csv 
+import DataClean
+import DataLoading
+# asks the user what file they want to open.
+file_name = input("Which file do you want to open? \n1.InputDataSample.csv\n2.Boston_Lyft_Uber_Data.csv\nEnter: ")
+# if the file is InputDataSample.csv
 if(file_name == '1'):
 	#user input for file operations
-	select=""
+	select = ""
 
-	while(select!="0"):
+	while(select != "0"):
 		select = input("\nPlease select an option:\n 1. Perform Numerical Analysis\n 2. Search\n 0. Quit\n Enter: ")
 		#Numerical Analysis
 		if(select == "1"):
@@ -34,7 +36,7 @@ if(file_name == '1'):
 				for lines in example:
 					countA += 1
 					totalA += int(lines['Column A'])
-					# appending column A to the list A element 
+					# appending column A to the list A element
 					listA.append(int(lines['Column A']))
 					if (countA == 1):
 						#Initialize values to first in list
@@ -51,13 +53,13 @@ if(file_name == '1'):
 				listA.sort()
 
 				# converts list to a set
-				# if the file is InputDataSample.csv 
+				# if the file is InputDataSample.csv
 				setA = set(listA)
 
 				for lines in example:
 					countB += 1
 					totalB += int(lines['Column B'])
-					# appending column B to the list B element 
+					# appending column B to the list B element
 					listB.append(int(lines['Column B']))
 
 					if (countB == 1):
@@ -98,7 +100,7 @@ if(file_name == '1'):
 				print("Median    \t\t", listA[int(countA/2)-1], "\t\t", listB[int(countB/2)-1])
 				print("Mode      \t\t", max(set(listA), key=listA.count), "\t\t", max(set(listB), key = listB.count))
 				print("SD        \t\t", VarianceA**(1/2), "\t", VarianceB**(1/2))
-				print("Variance  \t\t", VarianceA, "\t", VarianceB) 
+				print("Variance  \t\t", VarianceA, "\t", VarianceB)
 				print("Min       \t\t", minA, "\t\t\t", minB)
 				print("P20       \t\t", listA[int((20/100) * 10000)], "\t\t", listB[int((20/100) * 10000)])
 				print("P40       \t\t", listA[int((40/100) * 10000)], "\t\t", listB[int((40/100) * 10000)])
@@ -201,71 +203,12 @@ if(file_name == '1'):
 		#bad input
 		else:
 			print("Invalid input\n")
-# if the file is Boston_Lyft_Uber_Data.csv 
+# if the file is Boston_Lyft_Uber_Data.csv
 elif (file_name == '2'):
-	'''
-	This function accepts a CSV file and returns a 2-dimensional list
-	of the header and all values. If an exception is raised, it
-	returns to the caller with -1.
-	'''
-	def readcsv(file):
-		try:
-			spreadsheet = open(file)
-		except BaseException:
-			return -1
-		else:
-			values = []
-			header = [elem.strip() for elem in spreadsheet.readline().split(",")]
-			values.append(header)
-			for lines in spreadsheet:
-				values.append([item.strip() for item in lines.split(",")])
-			spreadsheet.close()
-			return values
-
-	'''
-	These functions remove rows with empty cells and rows with duplicate cells,
-	and remove columns with nonnumeric cells.
-	'''
-	def rowClean(valueArray):
-		toDelete = []
-        uniqueRows = set()
-		for row in range(1, len(valueArray)): #Skip the first line because it's the header and contains labels.
-			flag = False
-			for item in valueArray[row]:
-				if item == '': #if a row has a missing column entry
-					flag = True
-			if valueArray[row] in uniqueRows: #if a row is a duplicate with another (already in the set)
-				flag = True
-            else:
-                uniqueRows.add(valueArray[row])
-			if flag:
-				toDelete.append(row) #collect all rows flagged for deletion into an index list.
-		toDelete.sort(reverse=True)
-		for row in toDelete:
-			valueArray.pop(row) #We pop rows that qualify from the bottom up so we avoid range errors.
-
-		return valueArray
-
-	def colClean(valueArray):
-		toDeleteSet = set()
-		for col in range(len(valueArray[0])):
-			for row in valueArray[1:]:
-				if (row[col].lstrip('-').replace('.', '', 1).isnumeric() == False):
-					toDeleteSet.add(col) #if a column contains a nonnumeric string, flag for deletion
-
-		toDelete = sorted(toDeleteSet, reverse=True) #This is now a list in descending order
-		for item in toDelete:
-			for row in valueArray:
-				del row[item] #Pop from right to left to avoid range errors
-		return valueArray
-
-	def removeEmpty(valueArray):
-		return [x for x in valueArray if x != []] #Removes all empty lists from the set after cleaning.
-		
-		
-	data = readcsv("Boston_Lyft_Uber_Data.csv")	
-	data = rowClean(data)
-	data = colClean(data)
+	
+	data = DataLoading.readcsv("Boston_Lyft_Uber_Data.csv")	
+	data = DataClean.rowClean(data)
+	data = DataClean.colClean(data)
 	select = 1
 	while(select != '0'):
 		select = input("\nSelect from the following options.\n1. Perform Numerical Analysis\n2. Search\n0. Quit\nEnter: ")
@@ -283,7 +226,7 @@ elif (file_name == '2'):
 			print("Count\t\t", end = "", flush = True)
 			# iterate columns
 			for i in range(0, len(data[0])):
-				count = 0 
+				count = 0
 				# iterate rows
 				for row in data:
 					count+=1
@@ -339,7 +282,7 @@ elif (file_name == '2'):
 						listNums.append(float(row[i]))
 				# sorts list
 				listNums.sort()
-				# finds median 
+				# finds median
 				print(listNums[int(len(listNums)/2)], "\t\t", end = "", flush = True)
 
 			print("")
@@ -372,7 +315,7 @@ elif (file_name == '2'):
 					else:
 						# appends values to the list
 						count += 1
-						# calculates variance 
+						# calculates variance
 						listTotal += (float(row[i]) - listOfMeans[i])**2
 				# appends variance
 				listOfVariances.append(listTotal/count)
@@ -535,9 +478,9 @@ elif (file_name == '2'):
 			rlist = []
 			# searching dataset
 			if(len(colnum) == 0):
-				# iterate columns 
+				# iterate columns
 				for i in range(0, len(data[0])):
-					rcount = 0 
+					rcount = 0
 					# iterate rows
 					for row in data:
 						rcount+=1
@@ -545,7 +488,7 @@ elif (file_name == '2'):
 						if(val == row[i]):
 							# keeps track of the total occurences of val
 							count+=1
-							# appends a tuple containing row and column information 
+							# appends a tuple containing row and column information
 							rlist.append((rcount,data[0][i]))
 
 				print(val, " is present ", count, " times in dataset")
@@ -575,6 +518,5 @@ elif (file_name == '2'):
 			print("Goodbye...")
 		else:
 			print("Invalid Selection")
-else: 
+else:
 	print("Invalid selection.")
-
