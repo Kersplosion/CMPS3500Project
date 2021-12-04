@@ -12,6 +12,9 @@ returns to the caller with -1.
 def readcsv(file):
     try:
         spreadsheet = open(file)
+    except (FileNotFoundError, IOError):
+        print("File not found exiting program...")
+        exit()
     except BaseException:
         return -1
     else:
