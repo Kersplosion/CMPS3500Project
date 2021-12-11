@@ -9,21 +9,26 @@ These functions remove rows with empty cells and rows with duplicate cells,
 and remove columns with nonnumeric cells.
 '''
 def rowClean(valueArray):
-    toDelete = []
+    listOfLists = []
+    listOfDeletions = []
     for row in range(1, len(valueArray)): #Skip the first line because it's the header and contains labels.
-        flag = False
-        for item in valueArray[row]:
-            if item == '': #if a row has a missing column entry
-                flag = True
-        s = set(valueArray[row])
-        if (len(s) == 1 and len(s) != len(valueArray[row])): #if a row has all duplicate entries.
-            flag = True
-        if flag:
-            toDelete.append(row) #collect all rows flagged for deletion into an index list.
-    toDelete.sort(reverse=True)
-    for row in toDelete:
-        valueArray.pop(row) #We pop rows that qualify from the bottom up so we avoid range errors.
+        listOfLists.append(valueArray[row])
 
+    for i in range(len(listOfLists)):
+        if ('' in listOfLists[i]):
+            listOfDeletions.append(i)
+        for j in range(len(listOfLists)):
+            if(i == j) :
+                continue
+            else:
+                if (listOfLists[i] == listOfLists[j]):
+                    listOfDeletions.append(j)
+
+    listOfDeletions.sort(reverse=True)
+    for val in listOfDeletions:
+        listOfLists.pop(val)
+
+    valueArray = listOfLists
     return valueArray
 
 def colClean(valueArray):

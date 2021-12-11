@@ -24,8 +24,13 @@ data = DataClean.colClean(data)
 
 # prints out the first 10 rows to prove that it is being cleaned
 print('\n')
-for i in range(0,10):
-	print(data[i])
+
+if(len(data) < 10):
+	for i in range(0,len(data)):
+		print(data[i])
+else:
+	for i in range(0,10):
+		print(data[i])
 select = 1
 while(select != '0'):
 	select = input("\nSelect from the following options.\n1. Perform Numerical Analysis\n2. Search\n0. Quit\nEnter: ")
@@ -58,7 +63,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -75,7 +80,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -94,7 +99,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -112,7 +117,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -130,7 +135,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					count += 1
@@ -163,7 +168,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -180,7 +185,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -196,7 +201,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -212,7 +217,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -228,7 +233,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -244,7 +249,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -260,7 +265,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					1+1
+					continue
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -280,7 +285,7 @@ while(select != '0'):
 				print("Invalid input. Please try again.")
 				val = input("Input the value you want to search: ")
 		while(not isValid):
-			colnum = input(f"Input the column number you want to search (0-{len(data[0])}) or leave blank to search dataset: ")
+			colnum = input(f"Input the column number you want to search (0-{len(data[0]) - 1}) or leave blank to search dataset: ")
 			if(len(colnum) == 0):
 				isValid = True
 			elif(int(colnum) < 0 or int(colnum) > len(data[0])):
