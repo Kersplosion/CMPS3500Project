@@ -99,7 +99,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -117,7 +117,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -135,7 +135,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					count += 1
@@ -168,7 +168,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -185,7 +185,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -201,7 +201,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -217,7 +217,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -233,7 +233,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -249,7 +249,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
@@ -265,7 +265,7 @@ while(select != '0'):
 			for row in data:
 				# skips first entry in column since it is a header
 				if (row[i] == data[0][i]):
-					continue
+					continueq
 				else:
 					# appends values to the list
 					listNums.append(float(row[i]))
