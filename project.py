@@ -6,16 +6,26 @@
 #project.py
 import DataClean
 import DataLoading
-# asks the user what file they want to open.
-file_name = input("\nEnter a file you want to open. \nEnter: ")
-x = file_name.split(".")
-if("csv" not in x[len(x)-1]):
-	print("Invalid file type. Must be a CSV file.")
-	print("Exiting program...")
-	exit()
+
+validFile = False
+while(not validFile):
+	# asks the user what file they want to open.
+	file_name = input("\nEnter a file you want to open. \nEnter: ")
+	# checks to see if it a CSV file
+	# if not then ask the user to open the file again
+	x = file_name.split(".")
+	if("csv" not in x[len(x)-1]):
+		print("Invalid file type. Must be a CSV file.")
+	else:
+		validFile = True
 data = DataLoading.readcsv(file_name)	
 data = DataClean.rowClean(data)
 data = DataClean.colClean(data)
+
+# prints out the first 10 rows to prove that it is being cleaned
+print('\n')
+for i in range(0,10):
+	print(data[i])
 select = 1
 while(select != '0'):
 	select = input("\nSelect from the following options.\n1. Perform Numerical Analysis\n2. Search\n0. Quit\nEnter: ")
@@ -70,6 +80,7 @@ while(select != '0'):
 					# appends values to the list
 					listNums.append(float(row[i]))
 			# calculates mean and appends to the list
+			# takes the sum of each column and divides by each length
 			print("%0.2f" %(sum(listNums)/len(listNums)), "\t\t", end = "", flush = True)
 			listOfMeans.append((sum(listNums)/len(listNums)))
 
@@ -106,6 +117,7 @@ while(select != '0'):
 					# appends values to the list
 					listNums.append(float(row[i]))
 			# calculates mode
+			# gets the count of every value in the dataset, prints the max count (mode)
 			print(max(set(listNums), key=listNums.count), "\t\t", end = "", flush = True)
 		
 		listOfVariances = []
@@ -123,6 +135,7 @@ while(select != '0'):
 					# appends values to the list
 					count += 1
 					# calculates variance
+					# variance is the average of the sum of list of values minus it's mean squared
 					listTotal += (float(row[i]) - listOfMeans[i])**2
 			# appends variance
 			listOfVariances.append(listTotal/count)
@@ -131,6 +144,7 @@ while(select != '0'):
 		print("SD\t\t", end = "", flush = True)
 		for i in range(0, len(data[0])):
 			# calculates standard deviation
+			# SD = sqrt of variance
 			print("%0.2f" %(float(listOfVariances[i]))**(1/2), "\t\t", end = "", flush = True)
 
 		print("")
@@ -257,11 +271,12 @@ while(select != '0'):
 
 	elif(select == '2'):
 
-		# boolean flag to track valid input
+		# boolean flag to track valid input for searching the dataset
+		# will be set to false if user input for column number 
+		# is nonnumeric or out of range for the dataset
 		isValid = False
 		val = input("Input the value you want to search: ")
 		while(not val.isnumeric()):
-				isValid = False
 				print("Invalid input. Please try again.")
 				val = input("Input the value you want to search: ")
 		while(not isValid):
@@ -301,8 +316,8 @@ while(select != '0'):
 			for i in range(len(rlist)):
 				print(val, " is present in ", rlist[i][1], " row ", rlist[i][0])
 		# finds all occurences of val
+		# searching the columns 
 		else:	
-			
 			for row in data:
 				# keeps track of current row
 				rcount+=1
