@@ -7,6 +7,28 @@
 import DataClean
 import DataLoading
 
+# checks user input to see if it is a float while searching
+# user is able to enter a float when the program asks for the 
+# value they want to search
+def isFloat(num):
+	try:
+		float(num)
+		return True
+	except ValueError:
+		return False
+
+# checks user input to see if it is an int while searching
+# user is only able to enter an Int when the program asks 
+# for the column number they want to search
+def isInt(num):
+	try:
+		int(num)
+		return True
+	except ValueError:
+		return False
+
+
+
 validFile = False
 while(not validFile):
 	# asks the user what file they want to open.
@@ -38,7 +60,7 @@ while(select != '0'):
 		# prints out all the row names on the same line
 		print("Descriptor\t", end = "", flush = True)
 		for i in range(len(data[0])):
-			print(data[0][i], "\t", end = "", flush = True)
+			print(data[0][i], "\t ", end = "", flush = True)
 		
 		print("")
 		for i in range(len(data[0]) + 1):
@@ -281,13 +303,16 @@ while(select != '0'):
 		# is nonnumeric or out of range for the dataset
 		isValid = False
 		val = input("Input the value you want to search: ")
-		while(not val.isnumeric()):
+		while(isInt(val) == False and isFloat(val) == False):
 				print("Invalid input. Please try again.")
 				val = input("Input the value you want to search: ")
 		while(not isValid):
 			colnum = input(f"Input the column number you want to search (0-{len(data[0]) - 1}) or leave blank to search dataset: ")
 			if(len(colnum) == 0):
 				isValid = True
+			elif(isInt(colnum) == False):
+				isValid = False
+				print("Invalid input. Please try again.")
 			elif(int(colnum) < 0 or int(colnum) > len(data[0])):
 				isValid = False
 				print("Invalid input. Please try again.")

@@ -11,13 +11,13 @@ and remove columns with nonnumeric cells.
 def rowClean(valueArray):
     listOfLists = []
     listOfDeletions = []
-    for row in range(1, len(valueArray)): #Skip the first line because it's the header and contains labels.
+    for row in range(0, len(valueArray)): #Skip the first line because it's the header and contains labels.
         listOfLists.append(valueArray[row])
 
-    for i in range(len(listOfLists)):
+    for i in range(1,len(listOfLists)):
         if ('' in listOfLists[i]):
             listOfDeletions.append(i)
-        for j in range(len(listOfLists)):
+        for j in range(1,len(listOfLists)):
             if(i == j) :
                 continue
             else:
