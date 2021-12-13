@@ -4,6 +4,7 @@
 #Student 1: Tiara Smith
 #Student 2: Tristan Bock
 #DataClean.py
+import sortList
 '''
 These functions remove rows with empty cells and rows with duplicate cells,
 and remove columns with nonnumeric cells.
@@ -24,7 +25,7 @@ def rowClean(valueArray):
                 if (listOfLists[i] == listOfLists[j]):
                     listOfDeletions.append(j)
 
-    listOfDeletions.sort(reverse=True)
+    listOfDeletions = sortList.ReverseSort(listOfDeletions)
     for val in listOfDeletions:
         listOfLists.pop(val)
 
@@ -38,7 +39,7 @@ def colClean(valueArray):
             if (row[col].lstrip('-').replace('.', '', 1).isnumeric() == False):
                 toDeleteSet.add(col) #if a column contains a nonnumeric string, flag for deletion
 
-    toDelete = sorted(toDeleteSet, reverse=True) #This is now a list in descending order
+    toDelete = sortList.ReverseSort(toDeleteSet) #This is now a list in descending order
     for item in toDelete:
         for row in valueArray:
             del row[item] #Pop from right to left to avoid range errors

@@ -6,6 +6,7 @@
 #project.py
 import DataClean
 import DataLoading
+import sortList
 
 # checks user input to see if it is a float while searching
 # user is able to enter a float when the program asks for the 
@@ -26,7 +27,6 @@ def isInt(num):
 		return True
 	except ValueError:
 		return False
-
 
 
 validFile = False
@@ -126,7 +126,7 @@ while(select != '0'):
 					# appends values to the list
 					listNums.append(float(row[i]))
 			# sorts list
-			listNums.sort()
+			listNums = sortList.sortL(listNums)
 			# finds median
 			print(listNums[int(len(listNums)/2)], "\t\t", end = "", flush = True)
 
